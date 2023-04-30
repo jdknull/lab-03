@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
 import java.util.List;
 
-public class Car {
+public class Car implements Cloneable{
     private String make;
     private String model;
     private int year;
@@ -20,6 +20,16 @@ public class Car {
         this.recalls = fetchRecalls();
     }
 
+    public Car(Car c) {
+        this.make = c.make;
+        this.model = c.model;
+        this.year = c.year;
+        this.recalls = c.recalls;
+    }
+    @Override
+    public Car clone() {
+        return new Car(this);
+    }
     private List<Recall> fetchRecalls() {
         System.out.println("********************************");
         System.out.println("Fetching recalls from NHTSA...");
